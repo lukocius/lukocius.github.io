@@ -27,6 +27,15 @@ input {
   outline: none;
 }
 
+.output-container {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
 button {
   padding: 10px 20px;
   border: none;
@@ -90,7 +99,11 @@ button:hover {
 	  }
 	  const tableBody = document.createElement('tbody');
 
+	  const outputString = document.getElementById('outputField')
+	  var temp = ""
+
 	  for (const match of inputText.matchAll(pattern)) {
+	    temp += match[0] + " "
 		const row = document.createElement('tr');
 		for (let j = 1; j < 5; j++) {
 		  const cell = document.createElement('td');
@@ -99,6 +112,7 @@ button:hover {
 		}
 		tableBody.appendChild(row);
 	  }
+	  outputString.innerText = temp;
 	  wordsTable.innerHTML = '';
 	  wordsTable.appendChild(headerRow);
 	  wordsTable.appendChild(tableBody);
@@ -108,8 +122,9 @@ button:hover {
 
 <body>
     <div class="container">
-        <input type="text" id="inputField" placeholder="Enter text to split into columns">
+        <input type="text" id="inputField" placeholder="Įveskite pilną tekstą.">
         <button  id="splitButton" onclick=splitWords()>Split Words</button>
+		<div id="outputField" class="output-container" placeholder="Filtruoti parametrai"></div>
         <table id="wordsTable"></table>
     </div>
 </body>
